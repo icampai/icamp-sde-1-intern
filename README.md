@@ -43,6 +43,7 @@ For each task:
     - What you would improve with more time
 6. Commit index the assessment solution in-accordance to the tickets and push all changes to `main` on your fork.
 
-Once both tasks are complete, add `ip11` as a collaborator on your fork (Settings → Collaborators → Add people).
+Once you’ve completed both tasks, add ip11 as a collaborator to your fork (Settings → Collaborators → Add people). After that, send an email to `we@i.camp`
+ notifying that you’ve completed the assessment.
 
 ---
