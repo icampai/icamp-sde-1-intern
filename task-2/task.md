@@ -4,7 +4,7 @@
 
 ## Objective
 
-Build a fully client-side Kanban board. Users can create columns, add cards, move cards between columns, and edit or delete cards. All state persists to localStorage and survives a page reload. No frameworks, no libraries — vanilla JS, ES Modules, and the DOM APIs from SM-1.
+Build a fully client-side Kanban board. Users can create columns, add cards, move cards between columns, and edit or delete cards. All state persists to localStorage and survives a page reload. No frameworks, no libraries, just vanilla JS, ES Modules, and the DOM APIs from SM-1.
 
 ---
 
@@ -40,7 +40,7 @@ All JS files use ES Modules (`type="module"` on the `<script>` tag in `index.htm
 
 **Problem Statement:**
 
-`state.js` exports a single mutable state object and the functions that operate on it. No other file mutates state directly — all mutations go through these functions. On every mutation, state is serialised and written to localStorage. On page load, state is read from localStorage; if nothing is stored, a default seed is used.
+`state.js` exports a single mutable state object and the functions that operate on it. No other file mutates state directly, all mutations go through these functions. On every mutation, state is serialised and written to localStorage. On page load, state is read from localStorage; if nothing is stored, a default seed is used.
 
 The state shape is fixed:
 
@@ -98,7 +98,7 @@ ID generation: `'col-' + Date.now()` and `'card-' + Date.now()` are sufficient.
 
 **Output Format:**
 
-All mutation functions return `void`. `loadState()` returns the state object. No function should log to the console — callers handle feedback.
+All mutation functions return `void`. `loadState()` returns the state object. No function should log to the console, callers handle feedback.
 
 **Sample I/O:**
 
@@ -208,7 +208,7 @@ moveCard(/* card id */, 'right');
 
 **Problem Statement:**
 
-`board.js` exports a single `renderBoard()` function. It reads the current state, clears the board container, and rebuilds it. It does not hold any local DOM references between calls — every call is a clean rebuild from state.
+`board.js` exports a single `renderBoard()` function. It reads the current state, clears the board container, and rebuilds it. It does not hold any local DOM references between calls, every call is a clean rebuild from state.
 
 The rendered structure must match this shape:
 
@@ -240,7 +240,7 @@ Rules:
 - `←` button is disabled when the card is in the first column.
 - `→` button is disabled when the card is in the last column.
 - Empty columns show `.empty-placeholder` with text `"No cards yet"`.
-- `renderBoard()` must be called after every state mutation — not patched.
+- `renderBoard()` must be called after every state mutation, not patched.
 
 **Input Format:**
 
@@ -317,7 +317,7 @@ renderBoard();
 // ← is disabled (first column), → is enabled
 ```
 
-Add a card to the last column — `→` must be disabled, `←` must be enabled.
+Add a card to the last column, `→` must be disabled, `←` must be enabled.
 
 **Solution:** `/solutions/board.js`
 
@@ -325,11 +325,11 @@ Add a card to the last column — `→` must be disabled, `←` must be enabled.
 
 ### Ticket 3 — Event Wiring
 
-**Objective:** Wire all user interactions to state mutations and re-render — using a single delegated listener per board action.
+**Objective:** Wire all user interactions to state mutations and re-render, using a single delegated listener per board action.
 
 **Problem Statement:**
 
-`events.js` exports an `initEvents()` function called once in `main.js`. All board interactions are handled through event delegation on `#board` — one `click` listener reads `event.target` and dispatches to the correct handler based on class or `data-*` attributes. No per-card or per-column listeners are attached inside `renderBoard()`.
+`events.js` exports an `initEvents()` function called once in `main.js`. All board interactions are handled through event delegation on `#board`, one `click` listener reads `event.target` and dispatches to the correct handler based on class or `data-*` attributes. No per-card or per-column listeners are attached inside `renderBoard()`.
 
 Interactions to handle:
 
@@ -347,10 +347,10 @@ Interactions to handle:
 **Inline form behaviour (add card and edit card):**
 
 - Replace the trigger area with a small form containing a title `<input>`, a description `<textarea>`, a Save button, and a Cancel button.
-- Save validates that title is not empty — shows an inline error message if it is, does not call state.
+- Save validates that title is not empty, shows an inline error message if it is, does not call state.
 - Cancel restores the previous DOM without modifying state.
 - After a successful Save, call the appropriate state function and `renderBoard()`.
-- Only one inline form can be open at a time — opening a second one closes the first.
+- Only one inline form can be open at a time, opening a second one closes the first.
 
 **`main.js`:**
 
@@ -370,7 +370,7 @@ User interactions via click events on `#board`. Column id and card id are read f
 
 **Output Format:**
 
-DOM updates — `renderBoard()` called after every successful state mutation. No return value from handlers.
+DOM updates `renderBoard()` called after every successful state mutation. No return value from handlers.
 
 **Sample I/O:**
 
@@ -456,7 +456,7 @@ All interactions work end-to-end:
 
 A search `<input id="search">` sits above the board in `index.html`. As the user types, all cards whose titles do not contain the query string (case-insensitive) are hidden. Columns with no visible cards are visually dimmed (opacity reduced) but not removed from the DOM. Clearing the input restores all cards.
 
-Filtering must not call `renderBoard()` — it operates directly on the already-rendered DOM. This means it must be re-applied after every `renderBoard()` call to stay consistent.
+Filtering must not call `renderBoard()`, it operates directly on the already-rendered DOM. This means it must be re-applied after every `renderBoard()` call to stay consistent.
 
 **Input Format:**
 

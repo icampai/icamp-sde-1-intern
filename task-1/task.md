@@ -4,7 +4,7 @@
 
 Build `feedwatch` — a CLI that monitors RSS and Atom feeds for new items. On each run it fetches all registered feeds concurrently, parses the XML, compares new items against locally persisted seen-state, and reports what is new. No authentication required. The tool runs out of the box after `bun install`.
 
-This is a full engineering project structured as developer tickets. Each ticket has an acceptance test you can run before moving to the next. Work through them in order — later tickets depend on earlier ones.
+This is a full engineering project structured as developer tickets. Each ticket has an acceptance test you can run before moving to the next. Work through them in order, later tickets depend on earlier ones.
 
 ---
 
@@ -115,7 +115,7 @@ feedwatch remove hn
 # prompts for confirmation, removes on yes
 ```
 
-Feed state persists across invocations — restart the terminal and run `feedwatch list` again to verify.
+Feed state persists across invocations, restart the terminal and run `feedwatch list` again to verify.
 
 ---
 
@@ -145,7 +145,7 @@ feedwatch run
 # exit code 1 because one feed failed
 ```
 
-Introduce an artificial delay by running `feedwatch run --timeout 1` — hn should fail with a timeout error, not a crash.
+Introduce an artificial delay by running `feedwatch run --timeout 1`, hn should fail with a timeout error, not a crash.
 
 ---
 
