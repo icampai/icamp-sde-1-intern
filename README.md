@@ -23,9 +23,9 @@
 ## Working Through a Task
 
 - Each task has its own folder in the repository. Work only within that folder.
-- Complete parts in order, each part depends on the previous.
-- Each part has an **Acceptance** block. Every criterion must pass before moving to the next part.
-- Commit after completing each part. Use the part name as the commit message, e.g. `Ticket 1.1: Config and Layered Settings`.
+- Complete tickets in order, each ticket depends on the previous.
+- Each ticket has an **Acceptance** block. Every criterion must pass before moving to the next ticket.
+- Commit after completing each ticket. Use the ticket name as the commit message, e.g. `Ticket 1.1: Config and Layered Settings`.
 
 ---
 
@@ -41,7 +41,7 @@ For each task:
     - Architecture decisions - why you did the way you did
     - One thing that was harder than expected and how you resolved it
     - What you would improve with more time
-6. Commit and push all changes to `main` on your fork.
+6. Commit index the assessment solution in-accordance to the tickets and push all changes to `main` on your fork.
 
 Once both tasks are complete, add `ip11` as a collaborator on your fork (Settings → Collaborators → Add people).
 
