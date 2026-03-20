@@ -1,0 +1,8 @@
+{
+  "feeds": {
+    "hn": {
+      "name": "hn",
+      "url": "https://news.ycombinator.com/rss"
+    }
+  }
+}
