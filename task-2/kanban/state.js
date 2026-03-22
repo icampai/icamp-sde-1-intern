@@ -1,41 +1,27 @@
 // state.js
-
 const STORAGE_KEY = 'kanban-state';
 
 const DEFAULT_STATE = {
   columns: [
-    { id: 'col-1', title: 'To Do', cards: [] },
+    { id: 'col-1', title: 'To Do',       cards: [] },
     { id: 'col-2', title: 'In Progress', cards: [] },
-    { id: 'col-3', title: 'Done', cards: [] },
+    { id: 'col-3', title: 'Done',        cards: [] },
   ]
 };
 
 let state = { columns: [] };
 
-// LOAD & SAVE
 export function loadState() {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-
-    if (!stored) {
-      state = structuredClone(DEFAULT_STATE);
-      return state;
-    }
-
-    const parsed = JSON.parse(stored);
-
-    if (!parsed || !Array.isArray(parsed.columns)) {
-      state = structuredClone(DEFAULT_STATE);
-      return state;
-    }
-
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) throw new Error('empty');
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.columns)) throw new Error('corrupt');
     state = parsed;
-    return state;
-
   } catch {
-    state = structuredClone(DEFAULT_STATE);
-    return state;
+    state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   }
+  return state;
 }
 
 export function saveState() {
@@ -46,31 +32,23 @@ export function getState() {
   return state;
 }
 
-// COLUMN OPERATIONS
 export function addColumn(title) {
-  if (!title || title.trim() === '') {
-    throw new Error('Column title cannot be empty');
-  }
-
+  if (!title || !title.trim()) throw new Error('Column title cannot be empty');
   state.columns.push({
     id: 'col-' + Date.now(),
     title: title.trim(),
     cards: []
   });
-
   saveState();
 }
 
 export function removeColumn(id) {
-  state.columns = state.columns.filter(col => col.id !== id);
+  state.columns = state.columns.filter(c => c.id !== id);
   saveState();
 }
 
 export function renameColumn(id, newTitle) {
-  if (!newTitle || newTitle.trim() === '') {
-    throw new Error('Column title cannot be empty');
-  }
-
+  if (!newTitle || !newTitle.trim()) throw new Error('Column title cannot be empty');
   const col = state.columns.find(c => c.id === id);
   if (col) {
     col.title = newTitle.trim();
@@ -78,34 +56,26 @@ export function renameColumn(id, newTitle) {
   }
 }
 
-// CARD OPERATIONS
 export function addCard(columnId, title, description = '') {
-  if (!title || title.trim() === '') {
-    throw new Error('Card title cannot be empty');
-  }
-
+  if (!title || !title.trim()) throw new Error('Card title cannot be empty');
   const col = state.columns.find(c => c.id === columnId);
-  if (!col) return;
-
-  col.cards.push({
-    id: 'card-' + Date.now(),
-    title: title.trim(),
-    description: description || ''
-  });
-
-  saveState();
+  if (col) {
+    col.cards.push({
+      id: 'card-' + Date.now(),
+      title: title.trim(),
+      description: description.trim()
+    });
+    saveState();
+  }
 }
 
 export function updateCard(cardId, title, description) {
-  if (!title || title.trim() === '') {
-    throw new Error('Card title cannot be empty');
-  }
-
+  if (!title || !title.trim()) throw new Error('Card title cannot be empty');
   for (const col of state.columns) {
     const card = col.cards.find(c => c.id === cardId);
     if (card) {
       card.title = title.trim();
-      card.description = description || '';
+      card.description = description.trim();
       saveState();
       return;
     }
@@ -124,22 +94,15 @@ export function removeCard(cardId) {
 }
 
 export function moveCard(cardId, direction) {
-  for (let i = 0; i < state.columns.length; i++) {
-    const col = state.columns[i];
-    const idx = col.cards.findIndex(c => c.id === cardId);
-
-    if (idx !== -1) {
-      const target =
-        direction === 'left' ? i - 1 :
-        direction === 'right' ? i + 1 : i;
-
-      if (target < 0 || target >= state.columns.length) return;
-
-      const [card] = col.cards.splice(idx, 1);
-      state.columns[target].cards.push(card);
-
-      saveState();
-      return;
-    }
+  const columns = state.columns;
+  for (let ci = 0; ci < columns.length; ci++) {
+    const cardIdx = columns[ci].cards.findIndex(c => c.id === cardId);
+    if (cardIdx === -1) continue;
+    const targetIdx = direction === 'left' ? ci - 1 : ci + 1;
+    if (targetIdx < 0 || targetIdx >= columns.length) return; // no-op at boundary
+    const [card] = columns[ci].cards.splice(cardIdx, 1);
+    columns[targetIdx].cards.push(card);
+    saveState();
+    return;
   }
 }
