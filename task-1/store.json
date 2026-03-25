@@ -1,0 +1,39 @@
+{
+  "feeds": {
+    "hn": {
+      "url": "https://news.ycombinator.com/rss",
+      "seen": [
+        "https://www.sophielwang.com/blog/jpeg",
+        "https://willwarren.com/2026/03/12/building-my-own-cpu-part-3-from-simulation-to-hardware/",
+        "https://mistral.ai/news/forge",
+        "https://terathon.com/blog/decade-slug.html",
+        "https://bertrandmeyer.com/2026/03/16/celebrating-tony-hoares-mark-on-computer-science/",
+        "https://www.tomshardware.com/video-games/console-gaming/microsofts-unhackable-xbox-one-has-been-hacked-by-bliss-the-2013-console-finally-fell-to-voltage-glitching-allowing-the-loading-of-unsigned-code-at-every-level",
+        "https://fidget-spinner.github.io/posts/jit-on-track.html",
+        "https://openhardware.directory",
+        "https://ndea.com/jobs/search-guidance",
+        "https://oseifert.ch/blog/building-pgit",
+        "https://www.inconspicuous.info/p/the-pleasures-of-poor-product-design",
+        "https://www.otherstrangeness.com/2026/03/14/have-a-fucking-website/",
+        "https://github.com/gsd-build/get-shit-done",
+        "https://github.com/adammiribyan/zeroboot",
+        "https://robertsdotpm.github.io/software_engineering/program_names_as_input.html",
+        "https://rovarma.com/articles/a-tale-about-fixing-ebpf-spinlock-issues-in-the-linux-kernel/",
+        "https://typographica.org/on-typography/microsofts-cleartype-font-collection-a-fair-and-balanced-review/",
+        "https://blog.exe.dev/ssh-host-header",
+        "https://arxiv.org/abs/2603.15381",
+        "https://unsloth.ai/docs/new/studio",
+        "https://www.youtube.com/watch?v=3Ploi723hg4",
+        "https://techcrunch.com/2026/03/14/honda-is-killing-its-evs-and-any-chance-of-competing-in-the-future/",
+        "https://www.gutenberg.org/files/3207/3207-h/3207-h.htm",
+        "https://github.com/c4pt0r/agfs",
+        "https://news.ycombinator.com/item?id=47417335",
+        "https://stoffregen.io/posts/countryle/",
+        "https://news.cornell.edu/stories/2026/03/electron-microscopy-shows-mouse-bite-defects-semiconductors",
+        "https://amaiya.github.io/onprem/examples_agent.html",
+        "https://phys.org/news/2026-03-ryugu-asteroid-samples-dna-rna.html",
+        "https://wasmer.io/posts/edgejs-safe-nodejs-using-wasm-sandbox"
+      ]
+    }
+  }
+}

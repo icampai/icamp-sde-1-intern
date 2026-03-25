@@ -1,0 +1,373 @@
+/* style.css */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f4f5f7;
+  color: #172b4d;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: #0d1b2a;
+  padding: 0 20px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header h1 {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.search-wrap input {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 5px 12px;
+  width: 200px;
+  outline: none;
+  transition: width 0.2s, border-color 0.2s;
+}
+
+.search-wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.search-wrap input:focus {
+  width: 240px;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ── BOARD ── */
+main {
+  padding: 20px 16px;
+}
+
+#board {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+/* ── COLUMN ── */
+.column {
+  width: 260px;
+  flex-shrink: 0;
+  background: #ebecf0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 110px);
+  transition: opacity 0.2s;
+}
+
+.column-header {
+  padding: 10px 12px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.column-header h2 {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #42526e;
+}
+
+.rename-btn,
+.delete-col-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #97a0af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+
+.rename-btn:hover {
+  background: rgba(9, 30, 66, 0.1);
+  color: #0052cc;
+}
+
+.delete-col-btn:hover {
+  background: #ffebe6;
+  color: #de350b;
+}
+
+/* ── CARD LIST ── */
+.card-list {
+  padding: 0 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 30px;
+  flex: 1;
+}
+
+.card-list::-webkit-scrollbar {
+  width: 4px;
+}
+.card-list::-webkit-scrollbar-thumb {
+  background: rgba(9, 30, 66, 0.2);
+  border-radius: 4px;
+}
+
+.empty-placeholder {
+  font-size: 12px;
+  color: #97a0af;
+  text-align: center;
+  padding: 14px 8px;
+  border: 2px dashed rgba(9, 30, 66, 0.1);
+  border-radius: 3px;
+  margin: 2px 0;
+}
+
+/* ── CARD ── */
+.card {
+  background: #ffffff;
+  border-radius: 3px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.12), 0 0 0 1px rgba(9, 30, 66, 0.07);
+  cursor: default;
+  transition: box-shadow 0.12s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.18);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #172b4d;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: #5e6c84;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid #dfe1e6;
+  background: #ffffff;
+  cursor: pointer;
+  color: #5e6c84;
+  font-family: inherit;
+  transition: all 0.12s;
+}
+
+.edit-btn:hover {
+  background: #deebff;
+  color: #0052cc;
+  border-color: #0052cc;
+}
+
+.delete-btn:hover {
+  background: #ffebe6;
+  color: #de350b;
+  border-color: #de350b;
+}
+
+.move-left,
+.move-right {
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  border: 1px solid #dfe1e6;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #5e6c84;
+  font-family: inherit;
+  transition: all 0.12s;
+  margin-left: auto;
+}
+
+.move-left + .move-right {
+  margin-left: 0;
+}
+
+.move-left:hover:not(:disabled),
+.move-right:hover:not(:disabled) {
+  background: #deebff;
+  color: #0052cc;
+  border-color: #0052cc;
+}
+
+.move-left:disabled,
+.move-right:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── COLUMN FOOTER ── */
+.column-footer {
+  padding: 6px 8px 8px;
+}
+
+.add-card-btn {
+  width: 100%;
+  padding: 6px 8px;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #5e6c84;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.12s, color 0.12s;
+}
+
+.add-card-btn:hover {
+  background: rgba(9, 30, 66, 0.08);
+  color: #172b4d;
+}
+
+/* ── INLINE FORM ── */
+.inline-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+.inline-form-title,
+.inline-form-desc {
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  padding: 7px 9px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #172b4d;
+  background: #ffffff;
+  outline: none;
+  resize: vertical;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.inline-form-title:focus,
+.inline-form-desc:focus {
+  border-color: #0052cc;
+}
+
+.inline-form-desc {
+  min-height: 60px;
+}
+
+.inline-form-error {
+  font-size: 11.5px;
+  color: #de350b;
+  font-weight: 500;
+  min-height: 16px;
+}
+
+.inline-form-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.inline-form-save,
+.inline-form-cancel {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.12s;
+}
+
+.inline-form-save {
+  background: #0052cc;
+  color: #ffffff;
+  border: none;
+}
+
+.inline-form-save:hover {
+  background: #0747a6;
+}
+
+.inline-form-cancel {
+  background: none;
+  border: 1px solid #dfe1e6;
+  color: #5e6c84;
+}
+
+.inline-form-cancel:hover {
+  background: #ebecf0;
+  color: #172b4d;
+}
+
+/* ── ADD COLUMN BUTTON ── */
+#add-column-btn {
+  width: 220px;
+  flex-shrink: 0;
+  height: 42px;
+  background: rgba(9, 30, 66, 0.05);
+  border: 2px dashed rgba(9, 30, 66, 0.15);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5e6c84;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+
+#add-column-btn:hover {
+  background: rgba(0, 82, 204, 0.05);
+  border-color: #0052cc;
+  color: #0052cc;
+}
